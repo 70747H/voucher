@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Vouchers",
+    "description": "Vouchers API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8090",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Vouchers",
+      "description": "API for vouchers in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/vouchers": {
+      "get": {
+        "tags": ["Vouchers"],
+        "summary": "Get all vouchers",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vouchers"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Vouchers"],
+        "summary": "Create a voucher",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "user_id that we want to create a voucher for him/her",
+            "schema": {
+              "type": "object",
+              "required": "user_id",
+              "properties": {
+                "user_id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "New vocuher is created"
+          }
+        }
+      }
+    },
+    "/vouchers/{id}":{
+      "patch": {
+        "tags": ["Vouchers"],
+        "summary": "Update a vouchers",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of voucher to be consumed",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vouchers"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Voucher": {
+      "required": ["code", "id", "is_used", "user_id", "used_at"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "is_used": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "used_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Vouchers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Voucher"
+      }
+    }
+  }
+}

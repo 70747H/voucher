@@ -1,0 +1,51 @@
+{
+  "name": "zumra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "NODE_ENV=development nodemon bin/www",
+    "start": "node bin/www",
+    "test": "NODE_ENV=test DATABASE_URL=postgresql://user:pass@localhost:5433/db_test mocha test/**/**/*.spec.js --exit",
+    "test:watch": "NODE_ENV=test DATABASE_URL=postgresql://user:pass@localhost:5433/db_test mocha --watch test/**/**/*.spec.js",
+    "lint": "eslint --fix ./api/**/*.js",
+    "migration:create": "knex migrate:make",
+    "migration:up": "knex migrate:up",
+    "migration:rollback": "knex migrate:rollback",
+    "seed:create": "knex seed:make",
+    "seed:run": "knex seed:run",
+    "coverage": "nyc --reporter=text npm test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-json-validator-middleware": "^3.0.1",
+    "helmet": "^6.0.1",
+    "knex": "^2.4.2",
+    "node-mocks-http": "^1.12.1",
+    "objection": "^3.0.1",
+    "pg": "^8.9.0",
+    "short-uuid": "^4.2.2",
+    "swagger-ui-express": "^4.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "eslint": "^8.33.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20",
+    "nyc": "^15.1.0",
+    "rewire": "^6.0.0",
+    "sinon": "^15.0.1",
+    "sinon-chai": "^3.7.0",
+    "supertest": "^6.3.3"
+  }
+}
